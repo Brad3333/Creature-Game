@@ -6,4 +6,8 @@ public class Main {
     public int year() {
         return 2026;
     }
+
+    public int day() {
+        return 7;
+    }
 }
