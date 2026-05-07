@@ -13,12 +13,13 @@ public class MainApp extends Application {
 
         GameScene gameScene = new GameScene();
 
-        Scene scene = new Scene(gameScene, 800, 600);
+        Scene scene = new Scene(gameScene, UGV.SCREEN_WIDTH, UGV.SCREEN_HEIGHT);
 
         stage.setTitle("Creature Game");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        stage.centerOnScreen();
     }
 
     public static void main(String[] args) {
@@ -48,6 +49,6 @@ class StartScene {
         VBox root = new VBox();
         root.getChildren().add(new Label("Creature Game"));
 
-        return new Scene(root, 800, 600);
+        return new Scene(root, UGV.SCREEN_WIDTH, UGV.SCREEN_HEIGHT);
     }
 }
