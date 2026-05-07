@@ -11,11 +11,13 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
 
-        SceneManager.init(stage);
+        GameScene gameScene = new GameScene();
 
-        SceneManager.setScene(new StartScene().getScene());
+        Scene scene = new Scene(gameScene, 800, 600);
 
         stage.setTitle("Creature Game");
+        stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
