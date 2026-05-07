@@ -11,6 +11,8 @@ public class Tile {
     public static final Tile STONE2 = new Tile("/test/stone_2.png");
     public static final Tile STONE3 = new Tile("/test/stone_3.png");
 
+    public static final Tile START_GRID = new Tile("/screens/start/grid.png");
+
     public Tile(String path) {
         this.image = new Image(getClass().getResourceAsStream(path));
     }
