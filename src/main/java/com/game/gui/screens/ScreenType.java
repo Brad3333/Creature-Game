@@ -12,12 +12,30 @@ public enum ScreenType {
             return new StartScreen(loader, manager);
         }
     },
+    ATTACK {
+        @Override
+        public Screen create(ScreenLoader loader, ScreenManager manager) {
+            return new AttackScreen(loader, manager);
+        }
+    },
+    MAP {
+        @Override
+        public Screen create(ScreenLoader loader, ScreenManager manager) {
+            return new MapScreen(loader, manager);
+        }
+    },
     SHOP {
         @Override
         public Screen create(ScreenLoader loader, ScreenManager manager) {
             return new ShopScreen(loader, manager);
         }
-    };
+    },
+    SWITCH {
+        @Override
+        public Screen create(ScreenLoader loader, ScreenManager manager) {
+            return new SwitchScreen(loader, manager);
+        }
+    },;
 
     public abstract Screen create(ScreenLoader loader, ScreenManager manager);
 }

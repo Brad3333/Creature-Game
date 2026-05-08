@@ -12,11 +12,11 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.io.IOException;
 
-class ShopUiLayer implements Layer {
+class AttackUiLayer implements Layer {
 
     ScreenManager manager;
 
-    public ShopUiLayer(ScreenManager manager) {
+    public AttackUiLayer(ScreenManager manager) {
         this.manager = manager;
     }
 
@@ -32,20 +32,20 @@ class ShopUiLayer implements Layer {
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
         if (index.row == 0 && index.col == 0) {
-            manager.changeScreen(ScreenType.MAP, Direction.RIGHT);
+            manager.changeScreen(ScreenType.MAP, Direction.BOTTOM);
             return true;
         }
         return false;
     }
 }
 
-public class ShopScreen extends Screen {
+public class AttackScreen extends Screen {
 
-    public ShopScreen(ScreenLoader loader, ScreenManager manager) {
+    public AttackScreen(ScreenLoader loader, ScreenManager manager) {
         try {
-            this.addLayer(loader.loadBackground("/screens/shop/background.txt"));
-
-            this.addLayer(new ShopUiLayer(manager));
+            this.addLayer(loader.loadBackground("/screens/attack/background.txt"));
+            
+            this.addLayer(new AttackUiLayer(manager));
 
         } catch (IOException e) {
             e.printStackTrace();

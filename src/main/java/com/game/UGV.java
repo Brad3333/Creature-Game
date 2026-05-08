@@ -22,13 +22,12 @@ public final class UGV { // UniversalGameVariables
         public static final int OFFSET_X = (SCREEN_WIDTH - RENDER_WIDTH * TILE_SIZE) / 2;
         public static final int OFFSET_Y = (SCREEN_HEIGHT - RENDER_HEIGHT * TILE_SIZE) / 2;
 
-        public static final String GAME_TITLE = "Creature Game";
+        public static final String GAME_TITLE = "Creature Conquest";
 
         public static final boolean isRunning = true;
 
         // public static int LIFE = ;
         // game speed ect..
-        // --- HELPER FUNCTIONS ---
 
         /**
          * Gets the absolute center X of the playable grid.
@@ -64,6 +63,29 @@ public final class UGV { // UniversalGameVariables
          */
         public static double centerX(double objectWidth) {
                 return OFFSET_X + (RENDER_WIDTH * TILE_SIZE - objectWidth) / 2.0;
+        }
+
+        public static class TileIndex {
+                public int row, col;
+
+                public TileIndex(int col, int row) {
+                        this.col = col;
+                        this.row = row;
+                }
+        }
+
+        /**
+         * Returns the row and col index of the tile being clicked
+         */
+        public static TileIndex getTileIndex(double x, double y) {
+                int gridX = (int) ((x - UGV.OFFSET_X) / UGV.TILE_SIZE);
+                int gridY = (int) ((y - UGV.OFFSET_Y) / UGV.TILE_SIZE);
+
+                if (gridX >= 0 && gridX < UGV.RENDER_WIDTH && gridY >= 0 && gridY < UGV.RENDER_HEIGHT) {
+                        System.out.println("Tile clicked at: " + gridX + ", " + gridY);
+                        return new TileIndex(gridX, gridY);
+                }
+                return null;
         }
 
 }

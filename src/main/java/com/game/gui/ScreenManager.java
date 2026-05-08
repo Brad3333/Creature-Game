@@ -17,7 +17,7 @@ public class ScreenManager {
 
     public void changeScreen(ScreenType type, Direction dir) {
 
-        System.out.println("Chnaging to:" + type);
+        System.out.println("Changing to:" + type);
 
         if (transition != null)
             return;

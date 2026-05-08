@@ -7,11 +7,15 @@ import com.game.gui.ScreenManager;
 import com.game.gui.screens.ScreenType;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 class StartUiLayer implements Layer {
     private ScreenManager manager;
     private StarterFrame[] frames = new StarterFrame[4];
-    private StarterFrame selectedFrame = null; // Currently selected frame
+    private StarterFrame selectedFrame = null;
+
+    private final Image TITLE = new Image(
+            getClass().getResourceAsStream("/screens/start/CreatureConquestTitle.png"));
 
     public StartUiLayer(ScreenManager manager) {
         this.manager = manager;
@@ -25,14 +29,12 @@ class StartUiLayer implements Layer {
             double xPos = (gap + frameWidth) * i + gap;
             frames[i] = new StarterFrame(xPos, yPos, types[i]);
         }
-        
-        // Optional: Default to the first frame being selected
-        selectedFrame = frames[0]; 
+
+        selectedFrame = frames[0];
     }
 
     @Override
     public void update(double dt) {
-        // Sync each frame's internal state with the Layer's selectedFrame
         for (StarterFrame frame : frames) {
             frame.update(frame == selectedFrame);
         }
@@ -40,6 +42,9 @@ class StartUiLayer implements Layer {
 
     @Override
     public void draw(GraphicsContext g) {
+
+        g.drawImage(TITLE, UGV.centerX(UGV.TILE_SIZE * 26), UGV.TILE_SIZE * 1.5, UGV.TILE_SIZE * 26, UGV.TILE_SIZE * 3);
+
         for (StarterFrame frame : frames) {
             frame.draw(g);
         }
@@ -52,13 +57,11 @@ class StartUiLayer implements Layer {
 
         for (StarterFrame frame : frames) {
             if (frame.isClicked(localX, localY)) {
-                // If the user clicks the one already selected, move to next screen
                 if (selectedFrame == frame) {
-                    System.out.println("Confirmed selection: " + frame.getType());
-                    manager.changeScreen(ScreenType.SHOP, Direction.TOP);
+                    System.out.println("Confirmed selection: " + frame.getCreatureType());
+                    manager.changeScreen(ScreenType.MAP, Direction.TOP);
                 } else {
-                    // Otherwise, just change the highlight
-                    System.out.println("Previewing: " + frame.getType());
+                    System.out.println("Previewing: " + frame.getCreatureType());
                     selectedFrame = frame;
                 }
                 return true;
