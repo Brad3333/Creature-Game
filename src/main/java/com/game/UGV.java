@@ -22,6 +22,9 @@ public final class UGV { // UniversalGameVariables
         public static final int OFFSET_X = (SCREEN_WIDTH - RENDER_WIDTH * TILE_SIZE) / 2;
         public static final int OFFSET_Y = (SCREEN_HEIGHT - RENDER_HEIGHT * TILE_SIZE) / 2;
 
+        public static final double PLAYABLE_WIDTH = RENDER_WIDTH * TILE_SIZE;
+        public static final double PLAYABLE_HEIGHT = RENDER_HEIGHT * TILE_SIZE;
+
         public static final String GAME_TITLE = "Creature Conquest";
 
         public static final boolean isRunning = true;
@@ -63,6 +66,14 @@ public final class UGV { // UniversalGameVariables
          */
         public static double centerX(double objectWidth) {
                 return OFFSET_X + (RENDER_WIDTH * TILE_SIZE - objectWidth) / 2.0;
+        }
+
+        /**
+         * Useful for centering UI text: returns the Y coordinate needed
+         * to center an object of a specific width.
+         */
+        public static double centerY(double objectHeight) {
+                return OFFSET_Y + (RENDER_HEIGHT * TILE_SIZE - objectHeight) / 2.0;
         }
 
         public static class TileIndex {

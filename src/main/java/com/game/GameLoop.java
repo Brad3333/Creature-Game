@@ -1,6 +1,6 @@
 package com.game;
 
-import com.game.gui.ScreenManager;
+import com.game.scene.engine.SceneManager;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,15 +8,13 @@ import javafx.scene.canvas.GraphicsContext;
 public class GameLoop extends AnimationTimer {
 
     private GraphicsContext g;
-    private GameRenderer renderer;
 
     private long lastTime = 0;
-    private ScreenManager screenManager;
+    private SceneManager sceneManager;
 
-    public GameLoop(GraphicsContext g, GameRenderer renderer, ScreenManager screenManager) {
+    public GameLoop(GraphicsContext g, SceneManager sceneManager) {
         this.g = g;
-        this.renderer = renderer;
-        this.screenManager = screenManager;
+        this.sceneManager = sceneManager;
     }
 
     @Override
@@ -30,18 +28,11 @@ public class GameLoop extends AnimationTimer {
         double dt = (now - lastTime) / 1_000_000_000.0;
         lastTime = now;
 
-        update(dt);
-        render();
+        // Update our visuals
+        sceneManager.update(dt);
+
+        // Render the game
+        sceneManager.draw(g);
     }
 
-    private void update(double dt) {
-        // player.update()
-        // world.update()
-        // battle logic etc
-        screenManager.update(dt);
-    }
-
-    private void render() {
-        renderer.render(g, screenManager);
-    }
 }

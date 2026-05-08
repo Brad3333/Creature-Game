@@ -8,7 +8,8 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        
+
+        // Main game canvas container (all rendering goes through this)
         GameScene gameScene = new GameScene();
 
         Scene scene = new Scene(gameScene, UGV.SCREEN_WIDTH, UGV.SCREEN_HEIGHT);
@@ -20,6 +21,10 @@ public class MainApp extends Application {
         stage.centerOnScreen();
     }
 
+    /**
+     * Entry point for the JavaFX application.
+     * Launches the JavaFX lifecycle and calls start().
+     */
     public static void main(String[] args) {
         launch(args);
     }
