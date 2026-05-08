@@ -17,11 +17,14 @@ class StartUiLayer implements Layer {
     private final Image TITLE = new Image(
             getClass().getResourceAsStream("/screens/start/CreatureConquestTitle.png"));
 
+    private final Image BORDER = new Image(
+            getClass().getResourceAsStream("/screens/GameBorder.png"));
+
     public StartUiLayer(ScreenManager manager) {
         this.manager = manager;
 
         double gap = UGV.TILE_SIZE * 2.0;
-        double yPos = UGV.TILE_SIZE * 5.0;
+        double yPos = UGV.TILE_SIZE * 7.0;
         double frameWidth = UGV.TILE_SIZE * 5.0;
 
         FrameType[] types = FrameType.values();
@@ -43,8 +46,8 @@ class StartUiLayer implements Layer {
     @Override
     public void draw(GraphicsContext g) {
 
-        g.drawImage(TITLE, UGV.centerX(UGV.TILE_SIZE * 26), UGV.TILE_SIZE * 1.5, UGV.TILE_SIZE * 26, UGV.TILE_SIZE * 3);
-
+        g.drawImage(TITLE, UGV.centerX(UGV.TILE_SIZE * 26), UGV.TILE_SIZE * 3.5, UGV.TILE_SIZE * 26, UGV.TILE_SIZE * 3);
+        g.drawImage(BORDER, UGV.OFFSET_X, 0, UGV.TILE_SIZE * 30, UGV.TILE_SIZE * 20);
         for (StarterFrame frame : frames) {
             frame.draw(g);
         }

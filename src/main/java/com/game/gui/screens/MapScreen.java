@@ -9,12 +9,15 @@ import com.game.gui.ScreenLoader;
 import com.game.gui.ScreenManager;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
 
 class MapUiLayer implements Layer {
 
     ScreenManager manager;
+    private final Image BORDER = new Image(
+            getClass().getResourceAsStream("/screens/GameBorder.png"));
 
     public MapUiLayer(ScreenManager manager) {
         this.manager = manager;
@@ -26,6 +29,8 @@ class MapUiLayer implements Layer {
 
     @Override
     public void draw(GraphicsContext g) {
+
+        g.drawImage(BORDER, UGV.OFFSET_X, 0, UGV.TILE_SIZE * 30, UGV.TILE_SIZE * 20);
     }
 
     @Override
