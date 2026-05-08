@@ -12,10 +12,10 @@ public final class UGV { // UniversalGameVariables
         // Use percentage of screen (e.g., 80% of screen) and cuts off extra pixels <
         // TILE_SIZE
         public static final float SCREEN_PERCENT = 0.8F;
-        public static final int SCREEN_WIDTH = (int) (screenBounds.getWidth() * SCREEN_PERCENT)
-                        - (int) (screenBounds.getWidth() * SCREEN_PERCENT) % RENDER_WIDTH;
-        public static final int SCREEN_HEIGHT = (int) (screenBounds.getHeight() * SCREEN_PERCENT)
-                        - (int) (screenBounds.getHeight() * SCREEN_PERCENT) % RENDER_HEIGHT;
+        public static final int SCREEN_WIDTH = Math.min(720, (int) (screenBounds.getWidth() * SCREEN_PERCENT)
+                        - (int) (screenBounds.getWidth() * SCREEN_PERCENT) % RENDER_WIDTH);
+        public static final int SCREEN_HEIGHT = Math.min(500, (int) (screenBounds.getHeight() * SCREEN_PERCENT)
+                        - (int) (screenBounds.getHeight() * SCREEN_PERCENT) % RENDER_HEIGHT);
 
         public static final int TILE_SIZE = Math.min(SCREEN_WIDTH / RENDER_WIDTH, SCREEN_HEIGHT / RENDER_HEIGHT);
 
