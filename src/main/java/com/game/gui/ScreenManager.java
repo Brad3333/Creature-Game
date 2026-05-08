@@ -1,5 +1,6 @@
 package com.game.gui;
 
+import com.game.UGV;
 import com.game.gui.screens.ScreenType;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -58,6 +59,14 @@ public class ScreenManager {
     }
 
     public void draw(GraphicsContext g) {
+        g.save();
+
+        g.beginPath();
+        g.rect(UGV.OFFSET_X, UGV.OFFSET_Y,
+                UGV.RENDER_WIDTH * UGV.TILE_SIZE,
+                UGV.RENDER_HEIGHT * UGV.TILE_SIZE);
+        g.clip();
+
         double p = (transition == null) ? 0 : transition.getProgress();
         Direction dir = (transition == null) ? null : transition.getDirection();
 
@@ -70,5 +79,7 @@ public class ScreenManager {
             nextScreen.draw(g, ScreenUtil.getOffsetX(dir, false, p),
                     ScreenUtil.getOffsetY(dir, false, p));
         }
+
+        g.restore();
     }
 }
