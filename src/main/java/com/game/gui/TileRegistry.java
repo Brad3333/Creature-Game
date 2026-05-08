@@ -8,7 +8,8 @@ public class TileRegistry {
             1, Tile.RENDER,
             2, Tile.STONE1,
             3, Tile.STONE2,
-            4, Tile.STONE3);
+            4, Tile.STONE3,
+            5, Tile.START_GRID);
 
     public static Tile get(int id) {
         return TILES.getOrDefault(id, Tile.TEST);

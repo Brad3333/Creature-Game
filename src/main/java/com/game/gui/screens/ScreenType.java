@@ -3,6 +3,7 @@ package com.game.gui.screens;
 import com.game.gui.Screen;
 import com.game.gui.ScreenLoader;
 import com.game.gui.ScreenManager;
+import com.game.gui.screens.start.StartScreen;
 
 public enum ScreenType {
     START {
