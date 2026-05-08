@@ -1,6 +1,8 @@
 package com.game.gui;
 
 import com.game.UGV;
+import com.game.UGV.TileIndex;
+
 import javafx.scene.canvas.GraphicsContext;
 
 public class BackgroundLayer implements Layer {
@@ -34,14 +36,9 @@ public class BackgroundLayer implements Layer {
 
     @Override
     public boolean handleMouseClick(double x, double y) {
-        int gridX = (int) ((x - UGV.OFFSET_X) / UGV.TILE_SIZE);
-        int gridY = (int) ((y - UGV.OFFSET_Y) / UGV.TILE_SIZE);
-
-        if (gridX >= 0 && gridX < UGV.RENDER_WIDTH && gridY >= 0 && gridY < UGV.RENDER_HEIGHT) {
-            System.out.println("Tile clicked at: " + gridX + ", " + gridY);
+        TileIndex index = UGV.getTileIndex(x, y);
+        if (index != null)
             return true;
-        }
-
         return false;
     }
 }

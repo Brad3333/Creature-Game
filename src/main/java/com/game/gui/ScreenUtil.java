@@ -14,14 +14,12 @@ public class ScreenUtil {
     public static double getOffsetX(Direction dir, boolean current, double p) {
         if (dir == null)
             return 0;
-        return 0;
 
-        // Currently not working
-        // return switch (dir) {
-        //     case LEFT -> current ? p : p - screenWidth();
-        //     case RIGHT -> current ? -p : screenWidth() - p;
-        //     default -> 0;
-        // };
+        return switch (dir) {
+            case LEFT -> current ? p : p - screenWidth();
+            case RIGHT -> current ? -p : screenWidth() - p;
+            default -> 0;
+        };
     }
 
     public static double getOffsetY(Direction dir, boolean current, double p) {
