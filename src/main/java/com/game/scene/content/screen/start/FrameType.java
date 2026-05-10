@@ -2,8 +2,6 @@ package com.game.scene.content.screen.start;
 
 import com.game.entities.CreatureType;
 
-import javafx.scene.image.Image;
-
 public enum FrameType {
     LIFE(CreatureType.LIFE, "/screens/start/LifeStarterFrame.png"),
     LIGHTNING(CreatureType.LIGHTNING, "/screens/start/LightningStarterFrame.png"),
@@ -11,18 +9,18 @@ public enum FrameType {
     CYBORG(CreatureType.CYBORG, "/screens/start/CyborgStarterFrame.png");
 
     private final CreatureType type;
-    private final Image image;
+    private final String path;
 
     FrameType(CreatureType type, String path) {
         this.type = type;
-        this.image = new Image(getClass().getResourceAsStream(path));
+        this.path = path;
     }
 
     public CreatureType getCreatureType() {
         return type;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImagePath() {
+        return path;
     }
 }

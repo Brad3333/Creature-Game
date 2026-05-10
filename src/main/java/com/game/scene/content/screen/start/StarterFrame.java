@@ -1,48 +1,49 @@
 package com.game.scene.content.screen.start;
 
-import com.game.UGV;
+import java.util.function.Function;
+
 import com.game.entities.CreatureType;
+import com.game.scene.ui.Coordinates;
+import com.game.scene.ui.Pressable;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class StarterFrame {
-    private final double FRAME_SIZE = UGV.TILE_SIZE * 5.0;
+public class StarterFrame extends Pressable {
 
-    private double x, y;
     private FrameType frameType;
     private CreatureType creatureType;
-    private boolean isSelected = false; // Internal state
+    private boolean isSelected = false;
 
-    public StarterFrame(double x, double y, FrameType type) {
-        this.x = x;
-        this.y = y;
+    public StarterFrame(FrameType type, Function<Double, Double> xFunc,
+            Function<Double, Double> yFunc) {
+        super(type.getImagePath(), xFunc, yFunc);
         this.frameType = type;
         this.creatureType = frameType.getCreatureType();
     }
 
     public void update(boolean selected) {
+        super.update(0);
         this.isSelected = selected;
     }
 
     public void draw(GraphicsContext g) {
-        if (isSelected) {
-            g.setStroke(Color.YELLOW);
-            g.setLineWidth(3);
-            g.strokeRect(UGV.OFFSET_X + x - 2, y - 2, FRAME_SIZE + 4, FRAME_SIZE + 4);
-        }
+        Coordinates coordinates = super.getPosition();
+        double x = coordinates.x();
+        double y = coordinates.y();
 
-        g.drawImage(frameType.getImage(), UGV.OFFSET_X + x, y, FRAME_SIZE, FRAME_SIZE);
+        if (isSelected) {
+            g.setStroke(Color.BLACK);
+            g.setLineWidth(3);
+            g.strokeRect(x - 2, y - 2, size.width() + 4, size.height() + 4);
+        }
+        
+        super.draw(g);
 
         if (!isSelected) {
             g.setFill(new Color(0, 0, 0, 0.3));
-            g.fillRect(UGV.OFFSET_X + x, y, FRAME_SIZE, FRAME_SIZE);
+            g.fillRect(x, y, size.width(), size.height());
         }
-    }
-
-    public boolean isClicked(double mouseX, double mouseY) {
-        return mouseX >= x && mouseX <= x + FRAME_SIZE &&
-                mouseY >= y && mouseY <= y + FRAME_SIZE;
     }
 
     public FrameType getFrameType() {

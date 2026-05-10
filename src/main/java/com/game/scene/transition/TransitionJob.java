@@ -20,21 +20,21 @@ public class TransitionJob {
     public final Type type;
 
     public final SceneObjectFactory targetSceneObject;
-    public final TransitionDefinition animation;
+    public final Transition transition;
 
     public final long durationMs;
 
-    public TransitionJob(SceneObjectFactory targetSceneObject, TransitionDefinition animation) {
+    public TransitionJob(SceneObjectFactory targetSceneObject, Transition transition) {
         this.type = Type.SCREEN;
         this.targetSceneObject = targetSceneObject;
-        this.animation = animation;
+        this.transition = transition;
         this.durationMs = 0;
     }
 
     public TransitionJob(long durationMs) {
         this.type = Type.PAUSE;
         this.targetSceneObject = null;
-        this.animation = null;
+        this.transition = null;
         this.durationMs = durationMs;
     }
 }

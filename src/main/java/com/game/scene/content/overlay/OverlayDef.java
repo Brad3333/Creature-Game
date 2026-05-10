@@ -11,13 +11,13 @@ import com.game.scene.engine.SceneManager;
  * can create SceneObjects for the corresponding Overlay along with
  * create resource paths.
  */
-public enum OverlayDefinition implements SceneObjectFactory {
+public enum OverlayDef implements SceneObjectFactory {
 
     CURTAIN("/overlays/curtain");
 
     private final String path;
 
-    OverlayDefinition(String path) {
+    OverlayDef(String path) {
         this.path = path;
     }
 

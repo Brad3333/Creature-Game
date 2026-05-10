@@ -7,27 +7,32 @@ package com.game.scene.transition;
  * the methods on TransitionDefinition.
  */
 public class TransitionUtils {
-    private final TransitionDefinition direction;
+    private final Transition transition;
     private double progress = 0;
     private final double speed = 1200;
 
-    public TransitionUtils(TransitionDefinition direction) {
-        this.direction = direction;
+    public TransitionUtils(Transition transition) {
+        this.transition = transition;
     }
 
     public void update(double dt) {
-        progress += speed * dt;
+        progress = Math.min(progress + speed * dt, transition.limit());
     }
 
     public boolean isDone() {
-        return progress >= direction.limit();
+        return progress >= transition.limit();
     }
 
     public double getOffsetX(boolean current) {
-        return direction.xOffset(current, progress);
+        return transition.xOffset(current);
     }
 
     public double getOffsetY(boolean current) {
-        return direction.yOffset(current, progress);
+        return transition.yOffset(current);
     }
+
+    public boolean reverseDisplayOrder() {
+        return transition.coverMode == CoverMode.OUT;
+    }
+
 }

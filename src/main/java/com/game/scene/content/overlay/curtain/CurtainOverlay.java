@@ -2,7 +2,7 @@ package com.game.scene.content.overlay.curtain;
 
 import com.game.scene.background.BackgroundLoader;
 import com.game.scene.content.overlay.Overlay;
-import com.game.scene.content.overlay.OverlayDefinition;
+import com.game.scene.content.overlay.OverlayDef;
 import com.game.scene.engine.SceneManager;
 
 /**
@@ -13,7 +13,7 @@ import com.game.scene.engine.SceneManager;
 public class CurtainOverlay extends Overlay {
 
     public CurtainOverlay(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, OverlayDefinition.CURTAIN.resource("background.txt"));
+        this.addBackground(loader, OverlayDef.CURTAIN.resource("background.txt"));
     }
 
 }

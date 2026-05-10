@@ -1,8 +1,9 @@
 package com.game;
 
 import com.game.scene.background.BackgroundLoader;
-import com.game.scene.content.screen.ScreenDefinition;
+import com.game.scene.content.screen.ScreenDef;
 import com.game.scene.engine.SceneManager;
+import com.game.scene.ui.Input;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
@@ -17,12 +18,16 @@ public class GameScene extends Pane {
 
         // Visual brain of our game
         BackgroundLoader loader = new BackgroundLoader();
-        this.sceneManager = new SceneManager(loader, ScreenDefinition.START);
+        this.sceneManager = new SceneManager(loader, ScreenDef.START);
 
         canvas = new Canvas(UGV.SCREEN_WIDTH, UGV.SCREEN_HEIGHT);
 
         // This sends all mouse clicks into our SceneManager
         canvas.setOnMouseClicked(event -> sceneManager.handleMouseClick(event.getX(), event.getY()));
+        canvas.setOnMouseMoved(e -> {
+            Input.mouseX = e.getX() - UGV.OFFSET_X;
+            Input.mouseY = e.getY() - UGV.OFFSET_Y;
+        });
 
         this.getChildren().add(canvas);
 
