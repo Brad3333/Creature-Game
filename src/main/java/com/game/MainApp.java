@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage stage) {
+    public void start(@SuppressWarnings("exports") Stage stage) {
 
         // Main game canvas container (all rendering goes through this)
         GameScene gameScene = new GameScene();

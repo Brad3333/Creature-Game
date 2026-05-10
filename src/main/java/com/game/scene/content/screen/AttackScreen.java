@@ -5,7 +5,8 @@ import com.game.UGV.TileIndex;
 import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
-import com.game.scene.transition.TransitionDefinition;
+import com.game.scene.transition.Transition;
+import com.game.scene.ui.RenderObject;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -20,6 +21,9 @@ class AttackUiLayer implements Layer {
 
     SceneManager manager;
 
+    private final RenderObject Border = new RenderObject("/screens/StartBorder.png",
+            x -> 0.0, y -> 0.0);
+
     public AttackUiLayer(SceneManager manager) {
         this.manager = manager;
     }
@@ -30,13 +34,14 @@ class AttackUiLayer implements Layer {
 
     @Override
     public void draw(GraphicsContext g) {
+        Border.draw(g);
     }
 
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
         if (index.row == 0 && index.col == 0) {
-            manager.changeScreen(ScreenDefinition.MAP, TransitionDefinition.VIEWPOINT_TRANSITION);
+            manager.changeScene(ScreenDef.MAP, Transition.viewPoint());
             return true;
         }
         return false;
@@ -47,7 +52,7 @@ class AttackUiLayer implements Layer {
 public class AttackScreen extends Screen {
 
     public AttackScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDefinition.ATTACK.resource("background.txt"));
+        this.addBackground(loader, ScreenDef.ATTACK.resource("background.txt"));
         this.addLayer(new AttackUiLayer(manager));
     }
 

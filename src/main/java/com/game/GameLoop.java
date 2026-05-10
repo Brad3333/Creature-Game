@@ -12,7 +12,8 @@ public class GameLoop extends AnimationTimer {
     private long lastTime = 0;
     private SceneManager sceneManager;
 
-    public GameLoop(GraphicsContext g, SceneManager sceneManager) {
+    public GameLoop(@SuppressWarnings("exports") GraphicsContext g,
+            @SuppressWarnings("exports") SceneManager sceneManager) {
         this.g = g;
         this.sceneManager = sceneManager;
     }

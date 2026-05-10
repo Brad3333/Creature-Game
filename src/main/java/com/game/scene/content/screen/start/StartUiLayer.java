@@ -1,36 +1,48 @@
 package com.game.scene.content.screen.start;
 
 import com.game.UGV;
-import com.game.scene.content.screen.ScreenDefinition;
+import com.game.scene.content.screen.ScreenDef;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
-import com.game.scene.transition.TransitionDefinition;
+import com.game.scene.transition.Direction;
+import com.game.scene.transition.Transition;
+import com.game.scene.ui.Pressable;
+import com.game.scene.ui.RenderObject;
+import com.game.scene.ui.UIUtils;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 class StartUiLayer implements Layer {
     private SceneManager manager;
     private StarterFrame[] frames = new StarterFrame[4];
     private StarterFrame selectedFrame = null;
 
-    private final Image TITLE = new Image(
-            getClass().getResourceAsStream("/screens/start/CreatureConquestTitle.png"));
+    private final RenderObject Title = new RenderObject(ScreenDef.START.resource("CreatureConquestTitle.png"),
+            UIUtils::centerX, y -> UIUtils.tileOffset(3.5));
 
-    private final Image BORDER = new Image(
-            getClass().getResourceAsStream("/screens/GameBorder.png"));
+    private final RenderObject Border = new RenderObject("/screens/StartBorder.png",
+            x -> 0.0, y -> 0.0);
+
+    private final Pressable StartButton = new Pressable(
+
+            ScreenDef.START.resource("start_button.png"),
+
+            () -> {
+                manager.changeScene(ScreenDef.MAP, Transition.push(Direction.TOP));
+            },
+
+            UIUtils::centerX,
+            y -> UIUtils.tileOffset(13));
 
     public StartUiLayer(SceneManager manager) {
         this.manager = manager;
 
-        double gap = UGV.TILE_SIZE * 2.0;
-        double yPos = UGV.TILE_SIZE * 7.0;
-        double frameWidth = UGV.TILE_SIZE * 5.0;
-
         FrameType[] types = FrameType.values();
         for (int i = 0; i < types.length; i++) {
-            double xPos = (gap + frameWidth) * i + gap;
-            frames[i] = new StarterFrame(xPos, yPos, types[i]);
+            double xPos = (7.0) * i + 2.0;
+            frames[i] = new StarterFrame(types[i],
+                    x -> UIUtils.tileOffset(xPos),
+                    y -> UIUtils.tileOffset(7.0));
         }
 
         selectedFrame = frames[0];
@@ -38,6 +50,7 @@ class StartUiLayer implements Layer {
 
     @Override
     public void update(double dt) {
+        StartButton.update(dt);
         for (StarterFrame frame : frames) {
             frame.update(frame == selectedFrame);
         }
@@ -46,8 +59,9 @@ class StartUiLayer implements Layer {
     @Override
     public void draw(GraphicsContext g) {
 
-        g.drawImage(TITLE, UGV.centerX(UGV.TILE_SIZE * 26), UGV.TILE_SIZE * 3.5, UGV.TILE_SIZE * 26, UGV.TILE_SIZE * 3);
-        g.drawImage(BORDER, UGV.OFFSET_X, 0, UGV.TILE_SIZE * 30, UGV.TILE_SIZE * 20);
+        Border.draw(g);
+        Title.draw(g);
+        StartButton.draw(g);
         for (StarterFrame frame : frames) {
             frame.draw(g);
         }
@@ -58,15 +72,12 @@ class StartUiLayer implements Layer {
         double localX = x - UGV.OFFSET_X;
         double localY = y - UGV.OFFSET_Y;
 
+        if (StartButton.handleMouseClick(localX, localY))
+            return true;
         for (StarterFrame frame : frames) {
             if (frame.isClicked(localX, localY)) {
-                if (selectedFrame == frame) {
-                    System.out.println("Confirmed selection: " + frame.getCreatureType());
-                    manager.changeScreen(ScreenDefinition.MAP, TransitionDefinition.SLIDE_IN_TOP);
-                } else {
-                    System.out.println("Previewing: " + frame.getCreatureType());
-                    selectedFrame = frame;
-                }
+                System.out.println("Previewing: " + frame.getCreatureType());
+                selectedFrame = frame;
                 return true;
             }
         }

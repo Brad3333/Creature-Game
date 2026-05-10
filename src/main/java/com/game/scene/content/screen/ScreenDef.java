@@ -11,7 +11,7 @@ import com.game.scene.engine.SceneManager;
  * can create SceneObjects for the corresponding Overlay along with
  * create resource paths.
  */
-public enum ScreenDefinition implements SceneObjectFactory {
+public enum ScreenDef implements SceneObjectFactory {
 
     START("/screens/start"),
     ATTACK("/screens/attack"),
@@ -21,7 +21,7 @@ public enum ScreenDefinition implements SceneObjectFactory {
 
     private final String path;
 
-    ScreenDefinition(String path) {
+    ScreenDef(String path) {
         this.path = path;
     }
 

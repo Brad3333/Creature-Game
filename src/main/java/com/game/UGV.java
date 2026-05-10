@@ -33,20 +33,6 @@ public final class UGV { // UniversalGameVariables
         // game speed ect..
 
         /**
-         * Gets the absolute center X of the playable grid.
-         */
-        public static double getMidX() {
-                return OFFSET_X + (RENDER_WIDTH * TILE_SIZE) / 2.0;
-        }
-
-        /**
-         * Gets the absolute center Y of the playable grid.
-         */
-        public static double getMidY() {
-                return OFFSET_Y + (RENDER_HEIGHT * TILE_SIZE) / 2.0;
-        }
-
-        /**
          * Converts a raw mouse X coordinate to a 0-indexed grid column.
          */
         public static int getGridX(double mouseX) {
@@ -58,22 +44,6 @@ public final class UGV { // UniversalGameVariables
          */
         public static int getGridY(double mouseY) {
                 return (int) ((mouseY - OFFSET_Y) / TILE_SIZE);
-        }
-
-        /**
-         * Useful for centering UI text: returns the X coordinate needed
-         * to center an object of a specific width.
-         */
-        public static double centerX(double objectWidth) {
-                return OFFSET_X + (RENDER_WIDTH * TILE_SIZE - objectWidth) / 2.0;
-        }
-
-        /**
-         * Useful for centering UI text: returns the Y coordinate needed
-         * to center an object of a specific width.
-         */
-        public static double centerY(double objectHeight) {
-                return OFFSET_Y + (RENDER_HEIGHT * TILE_SIZE - objectHeight) / 2.0;
         }
 
         public static class TileIndex {
@@ -89,8 +59,8 @@ public final class UGV { // UniversalGameVariables
          * Returns the row and col index of the tile being clicked
          */
         public static TileIndex getTileIndex(double x, double y) {
-                int gridX = (int) ((x - UGV.OFFSET_X) / UGV.TILE_SIZE);
-                int gridY = (int) ((y - UGV.OFFSET_Y) / UGV.TILE_SIZE);
+                int gridX = getGridX(x);
+                int gridY = getGridY(y);
 
                 if (gridX >= 0 && gridX < UGV.RENDER_WIDTH && gridY >= 0 && gridY < UGV.RENDER_HEIGHT) {
                         System.out.println("Tile clicked at: " + gridX + ", " + gridY);

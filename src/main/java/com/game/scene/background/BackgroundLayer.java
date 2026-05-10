@@ -30,8 +30,8 @@ public class BackgroundLayer implements Layer {
 
                 g.drawImage(
                         tile.image,
-                        x * UGV.TILE_SIZE + UGV.OFFSET_X,
-                        y * UGV.TILE_SIZE + UGV.OFFSET_Y,
+                        x * UGV.TILE_SIZE,
+                        y * UGV.TILE_SIZE,
                         UGV.TILE_SIZE,
                         UGV.TILE_SIZE);
             }

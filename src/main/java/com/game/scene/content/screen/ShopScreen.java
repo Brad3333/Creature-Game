@@ -5,7 +5,9 @@ import com.game.UGV.TileIndex;
 import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
-import com.game.scene.transition.TransitionDefinition;
+import com.game.scene.transition.Direction;
+import com.game.scene.transition.Transition;
+import com.game.scene.ui.RenderObject;
 
 import javafx.scene.canvas.GraphicsContext;
 
@@ -17,6 +19,9 @@ import javafx.scene.canvas.GraphicsContext;
  * We need pixel art for it
  */
 class ShopUiLayer implements Layer {
+
+    private final RenderObject Border = new RenderObject("/screens/StartBorder.png",
+            x -> 0.0, y -> 0.0);
 
     SceneManager manager;
 
@@ -30,13 +35,14 @@ class ShopUiLayer implements Layer {
 
     @Override
     public void draw(GraphicsContext g) {
+        Border.draw(g);
     }
 
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
         if (index.row == 0 && index.col == 0) {
-            manager.changeScreen(ScreenDefinition.MAP, TransitionDefinition.SLIDE_IN_RIGHT);
+            manager.changeScene(ScreenDef.MAP, Transition.push(Direction.RIGHT));
             return true;
         }
         return false;
@@ -47,7 +53,7 @@ class ShopUiLayer implements Layer {
 public class ShopScreen extends Screen {
 
     public ShopScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDefinition.SHOP.resource("background.txt"));
+        this.addBackground(loader, ScreenDef.SHOP.resource("background.txt"));
         this.addLayer(new ShopUiLayer(manager));
     }
 }
