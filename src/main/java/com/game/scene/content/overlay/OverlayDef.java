@@ -1,6 +1,5 @@
 package com.game.scene.content.overlay;
 
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.content.SceneObjectFactory;
 import com.game.scene.content.overlay.curtain.CurtainOverlay;
 import com.game.scene.engine.SceneObject;
@@ -21,9 +20,9 @@ public enum OverlayDef implements SceneObjectFactory {
         this.path = path;
     }
 
-    public SceneObject create(BackgroundLoader loader, SceneManager manager) {
+    public SceneObject create(SceneManager manager) {
         return switch (this) {
-            case CURTAIN -> new CurtainOverlay(loader, manager);
+            case CURTAIN -> new CurtainOverlay(manager);
         };
     }
 

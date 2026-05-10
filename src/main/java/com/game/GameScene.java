@@ -1,6 +1,5 @@
 package com.game;
 
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.content.screen.ScreenDef;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.ui.Input;
@@ -17,8 +16,7 @@ public class GameScene extends Pane {
     public GameScene() {
 
         // Visual brain of our game
-        BackgroundLoader loader = new BackgroundLoader();
-        this.sceneManager = new SceneManager(loader, ScreenDef.START);
+        this.sceneManager = new SceneManager(ScreenDef.START);
 
         canvas = new Canvas(UGV.SCREEN_WIDTH, UGV.SCREEN_HEIGHT);
 

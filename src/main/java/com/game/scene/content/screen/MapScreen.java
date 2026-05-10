@@ -2,7 +2,6 @@ package com.game.scene.content.screen;
 
 import com.game.UGV;
 import com.game.UGV.TileIndex;
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
 import com.game.scene.transition.Direction;
@@ -41,19 +40,19 @@ class MapUiLayer implements Layer {
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
-        if (index.row == 0 && index.col == 0) { // Top Left goes back to Start
+        if (index.row() == 0 && index.col() == 0) { // Top Left goes back to Start
             manager.changeScene(ScreenDef.START, Transition.push(Direction.BOTTOM));
             return true;
         }
-        if (index.row == 0 && index.col == 29) { // Top Right goes to Attack
+        if (index.row() == 0 && index.col() == 29) { // Top Right goes to Attack
             manager.changeScene(ScreenDef.ATTACK, Transition.viewPoint().setSpeed(2400));
             return true;
         }
-        if (index.row == 19 && index.col == 29) { // Bottom Right goes to Switch
+        if (index.row() == 19 && index.col() == 29) { // Bottom Right goes to Switch
             manager.changeScene(ScreenDef.SWITCH, Transition.push(Direction.RIGHT));
             return true;
         }
-        if (index.row == 19 && index.col == 0) { // Bottom Left goes to Shop
+        if (index.row() == 19 && index.col() == 0) { // Bottom Left goes to Shop
             manager.changeScene(ScreenDef.SHOP, Transition.push(Direction.LEFT));
             return true;
         }
@@ -64,8 +63,8 @@ class MapUiLayer implements Layer {
 
 public class MapScreen extends Screen {
 
-    public MapScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDef.MAP.resource("background.txt"));
+    public MapScreen(SceneManager manager) {
+        this.addBackground(ScreenDef.MAP.resource("background.txt"));
         this.addLayer(new MapUiLayer(manager));
     }
 

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.game.scene.background.BackgroundLoader;
+import com.game.AssetManager;
 import com.game.scene.background.BackgroundLayer;
 import com.game.scene.layer.Layer;
 
@@ -48,9 +48,9 @@ public abstract class SceneObject implements Renderable {
         }
     }
 
-    public void addBackground(BackgroundLoader loader, String path) {
+    public void addBackground(String path) {
         try {
-            background = loader.loadBackground(path);
+            background = new BackgroundLayer(AssetManager.getGrid(path));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.game.scene.content.screen;
 
+import com.game.AssetManager;
 import com.game.scene.engine.Clickable;
 import com.game.scene.engine.SceneObject;
 
@@ -34,9 +35,7 @@ public abstract class Screen extends SceneObject implements Clickable {
 
         stopMusic();
 
-        Media media = new Media(
-            getClass().getResource(path).toExternalForm()
-        );
+        Media media = AssetManager.getMedia(path);
 
         music = new MediaPlayer(media);
         music.setCycleCount(MediaPlayer.INDEFINITE);

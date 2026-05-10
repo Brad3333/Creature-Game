@@ -2,7 +2,6 @@ package com.game.scene.content.screen;
 
 import com.game.UGV;
 import com.game.UGV.TileIndex;
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
 import com.game.scene.transition.Direction;
@@ -41,7 +40,7 @@ class ShopUiLayer implements Layer {
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
-        if (index.row == 0 && index.col == 0) {
+        if (index.row() == 0 && index.col() == 0) {
             manager.changeScene(ScreenDef.MAP, Transition.push(Direction.RIGHT));
             return true;
         }
@@ -52,8 +51,8 @@ class ShopUiLayer implements Layer {
 
 public class ShopScreen extends Screen {
 
-    public ShopScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDef.SHOP.resource("background.txt"));
+    public ShopScreen(SceneManager manager) {
+        this.addBackground(ScreenDef.SHOP.resource("background.txt"));
         this.addLayer(new ShopUiLayer(manager));
     }
 }

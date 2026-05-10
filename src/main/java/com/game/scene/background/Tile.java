@@ -1,5 +1,6 @@
 package com.game.scene.background;
 
+import com.game.AssetManager;
 import com.game.scene.content.overlay.OverlayDef;
 import com.game.scene.content.screen.ScreenDef;
 
@@ -18,6 +19,6 @@ public class Tile {
     public static final Tile RED = new Tile(OverlayDef.CURTAIN.resource("Red.png"));
 
     public Tile(String path) {
-        this.image = new Image(getClass().getResourceAsStream(path));
+        this.image = AssetManager.getImage(path);
     }
 }

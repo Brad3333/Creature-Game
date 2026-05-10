@@ -1,6 +1,5 @@
 package com.game.scene.content;
 
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneObject;
 import com.game.scene.engine.SceneManager;
 
@@ -13,7 +12,7 @@ import com.game.scene.engine.SceneManager;
  * 
  */
 public interface SceneObjectFactory {
-    SceneObject create(BackgroundLoader loader, SceneManager manager);
+    SceneObject create(SceneManager manager);
 
     String getBasePath();
 

@@ -1,6 +1,5 @@
 package com.game.scene.content.screen;
 
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.content.SceneObjectFactory;
 import com.game.scene.content.screen.start.StartScreen;
 import com.game.scene.engine.SceneObject;
@@ -25,13 +24,13 @@ public enum ScreenDef implements SceneObjectFactory {
         this.path = path;
     }
 
-    public SceneObject create(BackgroundLoader loader, SceneManager manager) {
+    public SceneObject create(SceneManager manager) {
         return switch (this) {
-            case START -> new StartScreen(loader, manager);
-            case ATTACK -> new AttackScreen(loader, manager);
-            case MAP -> new MapScreen(loader, manager);
-            case SHOP -> new ShopScreen(loader, manager);
-            case SWITCH -> new SwitchScreen(loader, manager);
+            case START -> new StartScreen(manager);
+            case ATTACK -> new AttackScreen(manager);
+            case MAP -> new MapScreen(manager);
+            case SHOP -> new ShopScreen(manager);
+            case SWITCH -> new SwitchScreen(manager);
         };
     }
 

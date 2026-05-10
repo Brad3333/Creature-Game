@@ -1,7 +1,6 @@
 package com.game.scene.engine;
 
 import com.game.UGV;
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.content.SceneObjectFactory;
 import com.game.scene.content.screen.Screen;
 import com.game.scene.content.screen.ScreenDef;
@@ -23,13 +22,10 @@ public class SceneManager {
     private Transition transition;
     private long pauseTimer = 0;
 
-    private final BackgroundLoader loader;
-
     private Deque<TransitionJob> jobQueue = new ArrayDeque<>();
 
-    public SceneManager(BackgroundLoader loader, ScreenDef initialType) {
-        this.loader = loader;
-        this.current = initialType.create(loader, this);
+    public SceneManager(ScreenDef initialType) {
+        this.current = initialType.create(this);
 
         if (current instanceof Screen screen) {
             screen.onEnter();
@@ -46,9 +42,11 @@ public class SceneManager {
     }
 
     public void handleMouseClick(double x, double y) {
+        double localX = x - UGV.OFFSET_X;
+        double localY = y - UGV.OFFSET_Y;
         // Only pass the click to clickable SceneObjects
         if (current != null && current instanceof Clickable clickable) {
-            clickable.handleMouseClick(x, y);
+            clickable.handleMouseClick(localX, localY);
         }
     }
 
@@ -76,7 +74,7 @@ public class SceneManager {
             }
 
             // Set the next screen and transition utils
-            next = job.targetSceneObject.create(loader, this);
+            next = job.targetSceneObject.create(this);
             transition = job.transition;
         }
 
