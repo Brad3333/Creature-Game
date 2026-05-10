@@ -1,6 +1,5 @@
 package com.game.scene.content.screen.start;
 
-import com.game.UGV;
 import com.game.scene.content.screen.ScreenDef;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
@@ -69,13 +68,10 @@ class StartUiLayer implements Layer {
 
     @Override
     public boolean handleMouseClick(double x, double y) {
-        double localX = x - UGV.OFFSET_X;
-        double localY = y - UGV.OFFSET_Y;
-
-        if (StartButton.handleMouseClick(localX, localY))
+        if (StartButton.handleMouseClick(x, y))
             return true;
         for (StarterFrame frame : frames) {
-            if (frame.isClicked(localX, localY)) {
+            if (frame.isClicked(x, y)) {
                 System.out.println("Previewing: " + frame.getCreatureType());
                 selectedFrame = frame;
                 return true;

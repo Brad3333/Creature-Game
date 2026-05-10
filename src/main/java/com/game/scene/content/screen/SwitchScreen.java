@@ -2,7 +2,6 @@ package com.game.scene.content.screen;
 
 import com.game.UGV;
 import com.game.UGV.TileIndex;
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
 import com.game.scene.transition.Direction;
@@ -41,7 +40,7 @@ class SwitchUiLayer implements Layer {
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
-        if (index.row == 0 && index.col == 0) {
+        if (index.row() == 0 && index.col() == 0) {
             manager.changeScene(ScreenDef.MAP, Transition.push(Direction.LEFT));
             return true;
         }
@@ -52,8 +51,8 @@ class SwitchUiLayer implements Layer {
 
 public class SwitchScreen extends Screen {
 
-    public SwitchScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDef.SWITCH.resource("background.txt"));
+    public SwitchScreen(SceneManager manager) {
+        this.addBackground(ScreenDef.SWITCH.resource("background.txt"));
         this.addLayer(new SwitchUiLayer(manager));
     }
 }

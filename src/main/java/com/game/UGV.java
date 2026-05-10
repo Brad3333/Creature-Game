@@ -36,24 +36,17 @@ public final class UGV { // UniversalGameVariables
          * Converts a raw mouse X coordinate to a 0-indexed grid column.
          */
         public static int getGridX(double mouseX) {
-                return (int) ((mouseX - OFFSET_X) / TILE_SIZE);
+                return (int) ((mouseX) / TILE_SIZE);
         }
 
         /**
          * Converts a raw mouse Y coordinate to a 0-indexed grid row.
          */
         public static int getGridY(double mouseY) {
-                return (int) ((mouseY - OFFSET_Y) / TILE_SIZE);
+                return (int) ((mouseY) / TILE_SIZE);
         }
 
-        public static class TileIndex {
-                public int row, col;
-
-                public TileIndex(int col, int row) {
-                        this.col = col;
-                        this.row = row;
-                }
-        }
+        public static record TileIndex(int col, int row) {}
 
         /**
          * Returns the row and col index of the tile being clicked

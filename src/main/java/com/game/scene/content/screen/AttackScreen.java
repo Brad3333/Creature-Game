@@ -2,7 +2,6 @@ package com.game.scene.content.screen;
 
 import com.game.UGV;
 import com.game.UGV.TileIndex;
-import com.game.scene.background.BackgroundLoader;
 import com.game.scene.engine.SceneManager;
 import com.game.scene.layer.Layer;
 import com.game.scene.transition.Transition;
@@ -40,7 +39,7 @@ class AttackUiLayer implements Layer {
     @Override
     public boolean handleMouseClick(double x, double y) {
         TileIndex index = UGV.getTileIndex(x, y);
-        if (index.row == 0 && index.col == 0) {
+        if (index.row() == 0 && index.col() == 0) {
             manager.changeScene(ScreenDef.MAP, Transition.viewPoint());
             return true;
         }
@@ -51,8 +50,8 @@ class AttackUiLayer implements Layer {
 
 public class AttackScreen extends Screen {
 
-    public AttackScreen(BackgroundLoader loader, SceneManager manager) {
-        this.addBackground(loader, ScreenDef.ATTACK.resource("background.txt"));
+    public AttackScreen(SceneManager manager) {
+        this.addBackground(ScreenDef.ATTACK.resource("background.txt"));
         this.addLayer(new AttackUiLayer(manager));
     }
 
